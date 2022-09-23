@@ -43,5 +43,29 @@ namespace ClassLibrary1
 
             return f(nums);
         }
+
+        #region  backtrack
+        private IList<IList<int>> res = new List<IList<int>>();
+
+        public IList<IList<int>> SubSetsBacktrack(int[] nums)
+        {
+            IList<int> subset = new List<int>();
+            Backtrack(subset, nums);
+            return res;
+        }
+
+        private void Backtrack(IList<int> subset, int[] nums)
+        {
+            res.Add(new List<int>(subset));
+
+            for(int i=0;i<nums.Length;i++)
+            {
+                subset.Add(nums[i]);
+                Backtrack(subset, nums.Skip(i+1).ToArray());
+                subset.RemoveAt(subset.Count()-1);
+            }
+        }
+
+        #endregion
     }
 }
