@@ -8,7 +8,7 @@ namespace ClassLibrary1
 {
     public class _105ConstructBinaryTreefromPreorderandInorderTraversal
     {
-        public TreeNode BuildTree(int[] preorder, int[] inorder)
+        public TreeNode BuildTreeOld(int[] preorder, int[] inorder)
         {
             TreeNode helper(int preStart, int inStart, int inEnd)
             {
@@ -17,9 +17,9 @@ namespace ClassLibrary1
                 TreeNode root = new TreeNode(preorder[preStart]);
 
                 int inIndex = 0;
-                for(int i=0; i<=inEnd; i++)
+                for (int i = 0; i <= inEnd; i++)
                 {
-                    if(root.val == inorder[i])
+                    if (root.val == inorder[i])
                     {
                         inIndex = i;
                         break;
@@ -32,6 +32,31 @@ namespace ClassLibrary1
             }
 
             return helper(0, 0, inorder.Length - 1);
+        }
+
+        public TreeNode BuildTree(int[] preorder, int[] inorder)
+        {
+
+            if (preorder.Length == 0) return null;
+            int rootInIndex = -1;
+            for (int i = 0; i < inorder.Length; i++)
+            {
+                if (inorder[i] == preorder[0])
+                {
+                    rootInIndex = i;
+                    break;
+                }
+            }
+
+            TreeNode root = new TreeNode() { val = preorder[0] };
+            root.left = BuildTree(
+                preorder.Skip(1).Take(rootInIndex).ToArray(),
+                inorder.Take(rootInIndex + 1).ToArray());
+            root.right = BuildTree(preorder.Skip(rootInIndex + 1).ToArray(),
+                inorder.Skip(rootInIndex + 1).ToArray());
+
+            return root;
+
         }
     }
 }

@@ -48,7 +48,7 @@ namespace ClassLibrary1
 
                     if (preNode != null)
                     {
-                        preNode.next = node;                        
+                        preNode.next = node;
                     }
 
                     //Console.Write(node.val);
@@ -61,16 +61,38 @@ namespace ClassLibrary1
                     preNode = node;
                 }
 
-                if (preNode!=null)
+                if (preNode != null)
                 {
                     preNode.next = null;
                 }
 
                 //Console.WriteLine();
-         
+
             }
             return root;
 
         }
+
+        public Node ConnectLevel(Node root)
+        {
+            if (root == null) return null;
+
+            Traverse(root.left, root.right);
+            return root;
+
+            void Traverse(Node left, Node right)
+            {
+                if(left==null||right==null) return;
+
+                left.next = right;
+
+                Traverse(left.left, left.right);
+                Traverse(right.left,right.right);
+                Traverse(left.right,right.left);
+            }
+
+        }
     }
+
+
 }
