@@ -33,5 +33,24 @@ namespace ClassLibrary1.Tests
 
 
         }
+
+
+        [TestMethod]
+        public void test2()
+        {
+            TreeNode root = new TreeNode
+            {
+                val = 1,
+                left = new TreeNode { val = 2, right = new TreeNode { val = 4 } },
+                right = new TreeNode { val = 3 }
+            };
+
+            var t = new _297SerializeAndDeserializeBinaryTree();
+            var ts = t.serializePost(root);
+
+            Console.WriteLine(ts);
+
+            // var tree = t.deserialize(ts);
+        }
     }
 }

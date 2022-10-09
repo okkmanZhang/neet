@@ -8,6 +8,8 @@ namespace ClassLibrary1
 
         string NULL_NODE = "#";
         string DELIMITER = ",";
+
+        #region preorder
         // Encodes a tree to a single string.
         public string serialize(TreeNode root)
         {
@@ -53,6 +55,48 @@ namespace ClassLibrary1
             return root;
 
         }
+        #endregion
 
+        #region postorder
+        public string serializePost(TreeNode root)
+        {
+            if (root==null) return NULL_NODE + DELIMITER;
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append(serializePost(root.left));
+            sb.Append(serializePost(root.right));
+            sb.Append(root.val.ToString()).Append(DELIMITER);
+
+            return sb.ToString();
+        }
+        public TreeNode deserializePost(string data)
+        {
+            if(data.Length==0) return null;
+
+            List<string> nodes = new List<string>();
+            nodes = data.Split(',').SkipLast(1).ToList<string>();
+
+            return helpPost(nodes);
+        }
+
+        public TreeNode helpPost(List<string> nodes)
+        {
+            if (nodes.Count==0) return null;
+
+            var lastNode = nodes[nodes.Count-1];
+            nodes.RemoveAt(nodes.Count-1);
+
+            if (lastNode == NULL_NODE)
+            {
+                return null;
+            }
+
+            TreeNode root = new TreeNode{val=Convert.ToInt32(lastNode)};
+            root.right = helpPost(nodes);
+            root.left = helpPost(nodes);
+
+            return root;
+        }
+        #endregion
     }
 }
