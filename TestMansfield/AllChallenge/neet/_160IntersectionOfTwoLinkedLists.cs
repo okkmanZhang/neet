@@ -58,5 +58,27 @@ namespace _160IntersectionOfTwoLinkedLists
 
             return null;
         }
+
+        public ListNode GetIntersectionNodeHashmap(ListNode headA, ListNode headB)
+        {
+            HashSet<ListNode> nodes = new HashSet<ListNode>();
+            ListNode p1 = headA;
+            ListNode p2 = headB;
+
+            while (p1 != null)
+            {
+                nodes.Add(p1);
+                p1 = p1.next;
+            }
+
+            while (p2 != null)
+            {
+                if (nodes.Contains(p2)) return p2;
+                p2 = p2.next;
+            }
+
+            return null;
+
+        }
     }
 }

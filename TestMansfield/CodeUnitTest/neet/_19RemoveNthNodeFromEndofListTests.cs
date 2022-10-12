@@ -31,5 +31,13 @@ namespace ClassLibrary1.Tests
 
         //}
 
+        [TestMethod()]
+        public void test()
+        {
+            ListNode x = new ListNode{val=1};
+
+            var r = new _19RemoveNthNodeFromEndofList().RemoveNthFromEndOneRound(x,1);
+        }
+
     }
 }
