@@ -22,4 +22,26 @@ public class _121BestTimeToBuyAndSellStock
 
         return prf;
     }
+
+    public int MaxProfitDp(int[] prices)
+    {
+        int n = prices.Length;
+        int[,] dp = new int[n,2];
+
+        for (int i = 0; i < n; i++)
+        {
+            if(i==0)
+            {
+                dp[0,0] = 0;
+                dp[0,1] = -prices[i];
+                continue;
+            }
+
+            dp[i,0] = Math.Max(dp[i-1,0], dp[i-1,1]+prices[i]);
+            dp[i,1] = Math.Max(dp[i-1,1],-prices[i]);
+            
+        }
+
+        return dp[n-1,0];
+    }
 }
