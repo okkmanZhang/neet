@@ -14,7 +14,7 @@ public class _53MaximunSubarray
         {
             sum += nums[i];
             if (sum > temp)
-                temp = sum;       
+                temp = sum;
 
             if (sum < 0)
                 sum = 0;
@@ -25,28 +25,45 @@ public class _53MaximunSubarray
         return temp;
     }
 
-    // public int MaxSubArray(int[] nums)
-    // {
+    public int MaxSubArraySlideWindow(int[] nums)
+    {
+        int l = 0, r = 0;
+        int maxSum = int.MinValue;
+        int sum = 0;
 
-    //     int temp = -100000;
-    //     int window = 1;
-    //     for (int i = window; i <= nums.Length; i++)
-    //     {
-    //         //Console.WriteLine($"win{i}");
-    //         for (int j = 0; j < nums.Length; j++)
-    //         {               
-    //             int sum = 0;
-    //             for( int w = j; (w < j + i && w < nums.Length ); w++){                    
-    //                 sum += nums[w];
-    //             }
-    //            //Console.WriteLine($"+{j}-{j+i-1} sum{sum}");                
+        while (r < nums.Length)
+        {
+            sum += nums[r];
+            r++;
 
-    //             if ( sum> temp)
-    //                 temp = sum;
-    //         }
-    //     }
+            maxSum = Math.Max(maxSum, sum);
 
-    //     //Console.WriteLine(temp);
-    //     return temp;
-    // }
+            while (sum < 0)
+            {
+                sum -= nums[l];
+                l++;
+            }
+        }
+
+        return maxSum;
+    }
+
+    public int MaxSubArrayDP(int[] nums)
+    {
+        int n = nums.Length;
+        if (n == 0) return 0;
+        int[] dp = new int[n];
+
+        dp[0] = nums[0];
+        for (int i = 1; i < n; i++)
+        {
+            dp[i] = Math.Max(nums[i], dp[i - 1] + nums[i]);
+        }
+        int res = int.MinValue;
+        for (int i = 0; i < n; i++)
+        {
+            res = Math.Max(res, dp[i]);
+        }
+        return res;
+    }
 }
