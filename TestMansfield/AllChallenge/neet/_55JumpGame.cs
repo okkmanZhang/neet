@@ -13,9 +13,9 @@ namespace ClassLibrary1
         {
             int lastGoodPosition = nums.Length - 1;
 
-            for (int i = nums.Length -1; i >= 0; i--)
+            for (int i = nums.Length - 1; i >= 0; i--)
             {
-                if (i + nums[i] >= lastGoodPosition )
+                if (i + nums[i] >= lastGoodPosition)
                 {
                     lastGoodPosition = i;
                 }
@@ -23,6 +23,20 @@ namespace ClassLibrary1
 
             return lastGoodPosition == 0;
         }
+
+        public bool CanJumpGreedy(int[] nums)
+        {
+            int n = nums.Length;
+            int farthest = 0;
+            for (int i = 0; i < n - 1; i++)
+            {
+                farthest = Math.Max(farthest, i + nums[i]);
+                if (farthest <= i) return false;
+            }
+
+            return farthest >= n - 1 ? true : false;
+        }
+
     }
 }
 
