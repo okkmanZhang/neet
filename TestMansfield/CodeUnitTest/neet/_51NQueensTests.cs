@@ -14,6 +14,12 @@ namespace ClassLibrary1.Tests
         [TestMethod()]
         public void Test1()
         {
+
+
+    _1143LongestCommonSubsequence test = new _1143LongestCommonSubsequence();
+    int tx =  test.LongestCommonSubsequence("bl", "yby");
+
+
             _51NQueens queens = new _51NQueens();
 
             var result = queens.SolveNQueens(4);

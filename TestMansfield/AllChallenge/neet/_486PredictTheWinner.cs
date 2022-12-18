@@ -1,16 +1,7 @@
-public class _877StoneGame
-{
-    public bool StoneGame(int[] piles)
-    {
-        return true;
-
-    }
-
 namespace ClassLibrary1
 {
-    public class _877StoneGame
+    public class _486PredictTheWinner
     {
-
         private class Pair
         {
             public int fir, sec;
@@ -20,22 +11,22 @@ namespace ClassLibrary1
                 this.sec = sec;
             }
         }
-        public bool StoneGame(int[] piles)
+        public bool PredictTheWinner(int[] nums)
         {
-            int n = piles.Length;
+            int n = nums.Length;
             Pair[,] dp = new Pair[n, n];
 
             for (int i = 0; i < n; i++)
             {
-                dp[i, i] = new Pair(piles[i], 0);
+                dp[i, i] = new Pair(nums[i], 0);
             }
 
             for (int i = n - 2; i >= 0; i--)
             {
                 for (int j = i + 1; j < n; j++)
                 {
-                    int left = piles[i] + dp[i + 1, j].sec;
-                    int right = piles[j] + dp[i, j - 1].sec;
+                    int left = nums[i] + dp[i + 1, j].sec;
+                    int right = nums[j] + dp[i, j - 1].sec;
 
                     if (left > right)
                     {
@@ -51,6 +42,5 @@ namespace ClassLibrary1
             var res = dp[0, n - 1];
             return res.fir - res.sec >= 0 ? true : false;
         }
-
     }
 }

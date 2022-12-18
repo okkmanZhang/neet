@@ -32,6 +32,10 @@ namespace ClassLibrary1.Tests
         [TestMethod]
         public void Test()
         {
+            
+            
+            
+            
             Node root = new Node(1,
                                 new Node(2, 
                                     new Node(4, null, null,null),
