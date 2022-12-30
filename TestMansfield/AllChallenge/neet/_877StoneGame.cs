@@ -1,11 +1,3 @@
-public class _877StoneGame
-{
-    public bool StoneGame(int[] piles)
-    {
-        return true;
-
-    }
-
 namespace ClassLibrary1
 {
     public class _877StoneGame
